@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Chen | Saiyan Full-Stack Engineer & Cloud Architect</title>
+    <meta name="description" content="Dragon Ball Z themed portfolio of Alex Chen — Full-Stack Saiyan Engineer, Master of Cloud Architectures, and Ki-powered web development with power levels beyond 9,000.">
+    <meta name="keywords" content="Dragon Ball Portfolio, Full Stack Developer, Saiyan Engineer, Web Development, Cloud Architect, Next.js, TypeScript">
+    
+    <!-- Open Graph / Meta -->
+    <meta property="og:title" content="Alex Chen | Saiyan Full-Stack Engineer">
+    <meta property="og:description" content="Explore epic sagas, high-scale projects, and ki-charged engineering feats.">
+    <meta property="og:image" content="assets/images/hero-dbz.jpg">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon (4-Star Dragon Ball) -->
+    <link rel="icon" type="image/jpeg" href="assets/images/dragonball.jpg">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="form-ssj">
+
+    <!-- Interactive Canvas & Background Overlays -->
+    <canvas id="ki-canvas"></canvas>
+    <div class="cyber-grid-overlay" aria-hidden="true"></div>
+
+    <!-- Saiyan Scouter HUD Viewfinder (Toggleable) -->
+    <div id="scouter-overlay" class="hidden" data-color="green" aria-hidden="true">
+        <div class="scouter-visor"></div>
+        <div class="scouter-scanlines"></div>
+        <div id="scouter-reticle" class="scouter-reticle-box"></div>
+        <div class="scouter-hud-display">
+            <div class="scouter-metric-label">TARGET SCANNER v4.2</div>
+            <div id="scouter-target-name" style="font-weight:700; color:#fff; margin: 0.2rem 0;">ACQUIRING TARGET...</div>
+            <div class="scouter-metric-label" style="margin-top: 0.5rem;">BATTLE POWER LEVEL</div>
+            <div id="scouter-power-num" class="scouter-power-readout">0</div>
+            <div style="font-size:0.75rem; color:#a7f3d0; margin-top:0.3rem;">
+                THREAT: <span id="scouter-threat-level" style="font-weight:700;">NORMAL</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kamehameha Full-Screen Blast Overlay -->
+    <div id="kamehameha-blast-overlay" class="hidden" aria-hidden="true"></div>
+
+    <!-- ==========================================================================
+       TOP NAVIGATION BAR
+       ========================================================================== -->
+    <header class="dbz-navbar">
+        <div class="nav-container">
+            <!-- Brand Logo -->
+            <a href="#hero" class="nav-brand" aria-label="Alex Chen Portfolio Home">
+                <div class="brand-capsule-logo">
+                    <img src="assets/images/dragonball.jpg" alt="4-Star Dragon Ball Emblem">
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title dynamic-user-name">ALEX CHEN</span>
+                    <span class="brand-sub">CAPSULE CORP ELITE</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#about" class="nav-link">Saga</a></li>
+                    <li><a href="#skills" class="nav-link">Techniques</a></li>
+                    <li><a href="#projects" class="nav-link">Battles</a></li>
+                    <li><a href="#experience" class="nav-link">Gravity Chamber</a></li>
+                    <li><a href="#contact" class="nav-link">Transmission</a></li>
+                </ul>
+            </nav>
+
+            <!-- Actions & Transformations -->
+            <div class="nav-actions">
+                <!-- Saiyan Transformation Switcher -->
+                <div class="form-selector-bar" title="Awaken Saiyan Transformation">
+                    <button class="form-select-btn" data-form="base">Base</button>
+                    <button class="form-select-btn active" data-form="ssj">SSJ</button>
+                    <button class="form-select-btn" data-form="blue">SSGSS</button>
+                    <button class="form-select-btn" data-form="ui">Ultra</button>
+                </div>
+
+                <!-- Scouter Toggle -->
+                <button id="scouter-toggle-btn" class="nav-icon-btn" aria-pressed="false" title="Toggle Saiyan Scouter Viewfinder"
+                    data-scouter-name="Saiyan Scouter HUD" data-scouter-power="8500" data-scouter-threat="EQUIPMENT">
+                    👓 <span class="nav-btn-text">SCOUTER</span>
+                </button>
+
+                <!-- Sound Effects Audio Toggle -->
+                <button id="audio-toggle-btn" class="nav-icon-btn" title="Toggle Web Audio Ki SFX">
+                    🔊 <span class="nav-btn-text">KI SOUNDS</span>
+                </button>
+
+                <!-- Profile Customizer Toggle -->
+                <button id="open-customizer-btn" class="nav-icon-btn" title="Customize Saiyan Profile"
+                    data-scouter-name="Capsule Corp Customizer" data-scouter-power="3200" data-scouter-threat="UTILITY">
+                    ⚙️
+                </button>
+
+                <!-- Mobile Hamburger -->
+                <button id="mobile-menu-btn" class="mobile-menu-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+                    ☰
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==========================================================================
+       HERO SECTION
+       ========================================================================== -->
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="hero-grid">
+                <!-- Left: Hero Text Content -->
+                <div class="hero-content">
+                    <div class="hero-badge-strip">
+                        <div class="saiyan-badge">
+                            ⚡ <span id="current-form-label">SUPER SAIYAN</span> ACTIVE
+                        </div>
+                        <div class="saiyan-badge">
+                            🏆 CLASS: ELITE CODE WARRIOR
+                        </div>
+                        <!-- DRAGON BALL #1 (1 STAR) -->
+                        <div class="dragon-ball-item" data-star="1" title="Collect the 1-Star Dragon Ball!"
+                            data-scouter-name="1-Star Dragon Ball" data-scouter-power="7777" data-scouter-threat="RELIC">
+                            <div class="db-stars-container">
+                                <span class="db-star-icon">★</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h1 class="hero-title">
+                        I AM <span class="gradient-text dynamic-user-name">ALEX CHEN</span><br>
+                        CODE WARRIOR.
+                    </h1>
+
+                    <div class="hero-subtitle-box">
+                        <span>&gt;</span>
+                        <span id="typewriter-text">Full-Stack Saiyan Engineer</span>
+                        <span class="typing-cursor">|</span>
+                    </div>
+
+                    <p class="hero-description dynamic-user-bio">
+                        Mastering the digital Hyperbolic Time Chamber to forge mission-critical architectures, ultra-fast interfaces, and bulletproof cloud infrastructures with power levels far surpassing mortal limits.
+                    </p>
+
+                    <div class="hero-cta-group">
+                        <a href="#projects" class="dbz-btn primary-btn"
+                            data-scouter-name="Inspect Battle Missions" data-scouter-power="9200" data-scouter-threat="HIGH IMPACT">
+                            ⚡ VIEW EPIC BATTLES
+                        </a>
+                        <a href="#contact" class="dbz-btn outline-btn"
+                            data-scouter-name="Send Ki Transmission" data-scouter-power="6500" data-scouter-threat="COMMUNICATION">
+                            📡 SEND TRANSMISSION
+                        </a>
+                        <button class="dbz-btn outline-btn" id="hero-resume-trigger" onclick="document.getElementById('resume-modal').classList.remove('hidden'); document.getElementById('resume-modal').classList.add('active'); if(window.dbzAudio) window.dbzAudio.playInstantTransmission();"
+                            data-scouter-name="Saiyan Credentials Scroll" data-scouter-power="9500" data-scouter-threat="LEGENDARY">
+                            📜 SAIYAN SCROLL (RESUME)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right: Hero Visual with Ki Aura & Avatar -->
+                <div class="hero-visual-card">
+                    <div class="aura-container">
+                        <div class="aura-ring"></div>
+                        <div class="aura-ring inner"></div>
+                        <img src="assets/images/avatar.jpg" alt="Alex Chen Saiyan Developer Avatar" class="hero-avatar-img"
+                            data-scouter-name="Alex Chen (Saiyan Dev)" data-scouter-power="9450" data-scouter-threat="GOD TIER">
+
+                        <!-- Floating Stat Badges -->
+                        <div class="floating-stat-pill pill-top">
+                            <span class="pill-icon">🔥</span>
+                            <div>
+                                <div class="pill-val">OVER 9,000</div>
+                                <div class="pill-label">Power Level Readout</div>
+                            </div>
+                        </div>
+
+                        <div class="floating-stat-pill pill-bottom">
+                            <span class="pill-icon">🚀</span>
+                            <div>
+                                <div class="pill-val">5+ YEARS</div>
+                                <div class="pill-label">In Gravity Chamber</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+           SECTION 2: ABOUT / SAGA
+           ========================================================================== -->
+        <section id="about" class="section-container">
+            <div class="section-header">
+                <div class="section-pre-title">
+                    <span>🥋</span> SAGA ORIGIN STORY
+                </div>
+                <h2 class="section-title">THE WARRIOR'S CREED</h2>
+                <p class="section-desc">Born to challenge unsolvable engineering limits, trained in the harshest production environments.</p>
+            </div>
+
+            <div class="about-grid">
+                <!-- Visual Banner Box -->
+                <div class="about-banner-box tilt-card"
+                    data-scouter-name="Battle Core Archive" data-scouter-power="9100" data-scouter-threat="S-RANK">
+                    <img src="assets/images/hero-dbz.jpg" alt="Saiyan Super Form Developer Visual" class="about-banner-img">
+                    <div class="about-banner-badge">
+                        <span style="color:var(--ki-primary); font-family:var(--font-hud); font-weight:700;">CAPSULE CORP PROTOCOL:</span>
+                        <div style="font-size:0.85rem; color:#fff;">Continuous Deployment &amp; Zero Downtime</div>
+                    </div>
+                </div>
+
+                <!-- Lore & Principles Card -->
+                <div class="about-card">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                        <h3>BEYOND PRODUCTION LIMITS</h3>
+                        <!-- DRAGON BALL #2 (2 STARS) -->
+                        <div class="dragon-ball-item" data-star="2" title="Collect the 2-Star Dragon Ball!"
+                            data-scouter-name="2-Star Dragon Ball" data-scouter-power="7777" data-scouter-threat="RELIC">
+                            <div class="db-stars-container">
+                                <span class="db-star-icon">★</span>
+                                <span class="db-star-icon">★</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>
+                        Just like a Saiyan grows exponentially stronger with every near-fatal battle, I treat production hurdles, scaling bottlenecks, and distributed architectural anomalies as training grounds for unprecedented breakthroughs.
+                    </p>
+                    <p>
+                        Specializing in modern full-stack architectures, high-concurrency Node/Go backends, responsive TypeScript/React interfaces, and resilient cloud automation that stays standing even under catastrophic load.
+                    </p>
+
+                    <div class="saiyan-core-traits">
+                        <div class="trait-item">
+                            <div class="trait-title">ZENKAI BOOST ARCHITECTURE</div>
+                            <div class="trait-desc">Every bug conquered makes our microservices 10x more resilient.</div>
+                        </div>
+                        <div class="trait-item">
+                            <div class="trait-title">INSTANT TRANSMISSION PIPELINES</div>
+                            <div class="trait-desc">Automated CI/CD with sub-minute global edge rollouts.</div>
+                        </div>
+                        <div class="trait-item">
+                            <div class="trait-title">ULTRA INSTINCT PRECISION</div>
+                            <div class="trait-desc">Pixel-perfect UI rendered with reactive 60fps micro-animations.</div>
+                        </div>
+                        <div class="trait-item">
+                            <div class="trait-title">SPIRIT BOMB COLLABORATION</div>
+                            <div class="trait-desc">Uniting cross-functional engineering squads for planetary impact.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+           SECTION 3: TECHNIQUES (SKILLS)
+           ========================================================================== -->
+        <section id="skills" class="section-container">
+            <div class="section-header">
+                <div class="section-pre-title">
+                    <span>⚡</span> COMBAT DISCIPLINES
+                </div>
+                <h2 class="section-title">TECHNIQUES &amp; KI BLASTS</h2>
+                <p class="section-desc">Each language and framework mastered through grueling hours in 100x Earth Gravity.</p>
+            </div>
+
+            <div class="skills-grid">
+                <!-- Skill Category 1: Frontend Ki -->
+                <div class="skill-category-card tilt-card"
+                    data-scouter-name="Ki Manipulation (Frontend)" data-scouter-power="9420" data-scouter-threat="LETHAL">
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                        <span class="card-header-icon">💥</span>
+                        <!-- DRAGON BALL #3 (3 STARS) -->
+                        <div class="dragon-ball-item" data-star="3" title="Collect the 3-Star Dragon Ball!"
+                            data-scouter-name="3-Star Dragon Ball" data-scouter-power="7777" data-scouter-threat="RELIC">
+                            <div class="db-stars-container">
+                                <span class="db-star-icon">★</span>
+                                <span class="db-star-icon">★</span>
+                                <span class="db-star-icon">★</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="category-title">KI MANIPULATION</h3>
+                    <div class="category-sub">FRONTEND &amp; INTERACTIVE UI</div>
+
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <div class="skill-meta">
+                                <span class="skill-name">React / Next.js 15</span>
+                                <span class="skill-power">98% Ki</span>
+                            </div>
+                            <div class="energy-bar-track">
+                                <div class="energy-bar-fill" style="width: 98%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-meta">
+                                <span class="skill-name">TypeScript / Modern ESNext</span>
+                                <span class="skill-power">95% Ki</span>
+                            </div>
+                            <div class="energy-bar-track">
+                                <div class="energy-bar-fill" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-meta">
+                                <span class="skill-name">Tailored CSS / WebGL / Canvas</span>
+                                <span class="skill-power">92% Ki</span>
+                            </div>
+                            <div class="energy-bar-track">
+                                <div class="energy-bar-fill" style="width: 92%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Category 2: Backend Gravity -->
+                <div class="skill-category-card tilt-card"
+                    data-scouter-name="Heavy Gravity (Backend)" data-scouter-power="9350" data-scouter-threat="DEVASTATING">
+                    <span class="card-header-icon">⚡</span>
+                    <h3 class="category-title">HEAVY GRAVITY</h3>
+                    <div class="category-sub">BACKEND &amp; DISTRIBUTED SERVERS</div>
+
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <div class="skill-meta">
+                                <span class="skill-name">Node.js / Express / NestJS</span>
+                                <span class="skill-power">96% Ki</span>
+                            </div>
+                            <div class="energy-bar-track">
+                                <div class="energy-bar-fill" style="width: 96%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-meta">
+                                <span class="skill-name">Python / FastAPI / Go</span>
+                                <span class="skill-power">90% Ki</span>
+                            </div>
+                            <div class="energy-bar-track">
+                                <div class="energy-bar-fill" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-meta">
+                                <span class="skill-name">PostgreSQL / Redis / MongoDB</span>
+                                <span class="skill-power">94% Ki</span>
+                            </div>
+                            <div class="energy-bar-track">
+                                <div class="energy-bar-fill" style="width: 94%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Category 3: Cloud & Teleportation -->
+                <div class="skill-category-card tilt-card"
+                    data-scouter-name="Instant Transmission (DevOps)" data-scouter-power="9180" data-scouter-threat="HIGH TIER">
+                    <span class="card-header-icon">🌌</span>
+                    <h3 class="category-title">INSTANT TRANSMISSION</h3>
+                    <div class="category-sub">CLOUD, CONTAINERS &amp; DEVOPS</div>
+
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <div class="skill-meta">
+                                <span class="skill-name">Docker &amp; Kubernetes</span>
+                                <span class="skill-power">91% Ki</span>
+                            </div>
+                            <div class="energy-bar-track">
+                                <div class="energy-bar-fill" style="width: 91%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-meta">
+                                <span class="skill-name">AWS / Cloudflare Edge</span>
+                                <span class="skill-power">89% Ki</span>
+                            </div>
+                            <div class="energy-bar-track">
+                                <div class="energy-bar-fill" style="width: 89%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-meta">
+                                <span class="skill-name">CI/CD &amp; Terraform</span>
+                                <span class="skill-power">88% Ki</span>
+                            </div>
+                            <div class="energy-bar-track">
+                                <div class="energy-bar-fill" style="width: 88%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+           SECTION 4: EPIC BATTLES (PROJECTS)
+           ========================================================================== -->
+        <section id="projects" class="section-container">
+            <div class="section-header">
+                <div class="section-pre-title">
+                    <span>🏆</span> SAGAS WON
+                </div>
+                <h2 class="section-title">EPIC BATTLES &amp; ARCHITECTURES</h2>
+                <p class="section-desc">Key systems deployed to safeguard planetary infrastructure against crash threats.</p>
+            </div>
+
+            <div class="projects-grid">
+                <!-- Battle Card 1: Capsule Corp Cloud OS -->
+                <div class="project-card tilt-card"
+                    data-scouter-name="Capsule Corp Cloud OS" data-scouter-power="18500" data-scouter-threat="OVER 9000!">
+                    <div class="project-thumb-box">
+                        <img src="assets/images/project-capsule.jpg" alt="Capsule Corp Cloud OS Interface" class="project-thumb-img">
+                        <span class="project-saga-badge">SAGA I: PLANETARY OS</span>
+                        <!-- DRAGON BALL #4 (4 STARS - ICONIC!) -->
+                        <div class="dragon-ball-item project-card-ball" data-star="4" title="Collect the 4-Star Dragon Ball!"
+                            data-scouter-name="Iconic 4-Star Ball" data-scouter-power="9999" data-scouter-threat="SUPREME RELIC">
+                            <div class="db-stars-container">
+                                <span class="db-star-icon">★</span>
+                                <span class="db-star-icon">★</span>
+                                <span class="db-star-icon">★</span>
+                                <span class="db-star-icon">★</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-body">
+                        <h3 class="project-title">Capsule Corp Cloud OS</h3>
+                        <p class="project-desc">
+                            Distributed cloud dashboard featuring real-time holographic diagnostics, microservice telemetry, and automated circuit breakers designed for planetary scale.
+                        </p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Next.js 15</span>
+                            <span class="tech-tag">Go Microservices</span>
+                            <span class="tech-tag">Kubernetes</span>
+                            <span class="tech-tag">Redis</span>
+                        </div>
+                        <div class="project-card-footer">
+                            <button class="dbz-btn primary-btn inspect-project-btn" data-project-id="capsule">
+                                🔍 INSPECT BATTLE
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Battle Card 2: Hyperbolic Time Chamber Simulator -->
+                <div class="project-card tilt-card"
+                    data-scouter-name="Hyperbolic Time Chamber" data-scouter-power="24000" data-scouter-threat="OVER 9000!">
+                    <div class="project-thumb-box">
+                        <img src="assets/images/project-chamber.jpg" alt="Hyperbolic Time Chamber Virtual World" class="project-thumb-img">
+                        <span class="project-saga-badge">SAGA II: TIME CHAMBER</span>
+                        <!-- DRAGON BALL #5 (5 STARS) -->
+                        <div class="dragon-ball-item project-card-ball" data-star="5" title="Collect the 5-Star Dragon Ball!"
+                            data-scouter-name="5-Star Dragon Ball" data-scouter-power="7777" data-scouter-threat="RELIC">
+                            <div class="db-stars-container">
+                                <span class="db-star-icon">★</span>
+                                <span class="db-star-icon">★</span>
+                                <span class="db-star-icon">★</span>
+                                <span class="db-star-icon">★</span>
+                                <span class="db-star-icon">★</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-body">
+                        <h3 class="project-title">Hyperbolic Time Chamber</h3>
+                        <p class="project-desc">
+                            Infinite void WebGL collaborative space where 1 real second simulates accelerated WASM compiler routines and peer-to-peer load testing at 120 FPS.
+                        </p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Three.js</span>
+                            <span class="tech-tag">Rust / WASM</span>
+                            <span class="tech-tag">WebRTC Mesh</span>
+                            <span class="tech-tag">Shaders</span>
+                        </div>
+                        <div class="project-card-footer">
+                            <button class="dbz-btn primary-btn inspect-project-btn" data-project-id="chamber">
+                                🔍 INSPECT BATTLE
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Battle Card 3: Global Dragon Radar Navigation -->
+                <div class="project-card tilt-card"
+                    data-scouter-name="Dragon Radar Navigation" data-scouter-power="32000" data-scouter-threat="OVER 9000!">
+                    <div class="project-thumb-box">
+                        <img src="assets/images/project-radar.jpg" alt="Capsule Corp Dragon Radar Device" class="project-thumb-img">
+                        <span class="project-saga-badge">SAGA III: QUANTUM RADAR</span>
+                    </div>
+
+                    <div class="project-body">
+                        <h3 class="project-title">Global Dragon Radar System</h3>
+                        <p class="project-desc">
+                            Geospatial tracking engine modeled after Bulma's quantum Dragon Radar with millimeter satellite telemetry and predictive electromagnetic wave analysis.
+                        </p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">PostGIS</span>
+                            <span class="tech-tag">Mapbox GL</span>
+                        </div>
+                        <div class="project-card-footer">
+                            <button class="dbz-btn primary-btn inspect-project-btn" data-project-id="radar">
+                                🔍 INSPECT BATTLE
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+           SECTION 5: GRAVITY CHAMBER (EXPERIENCE & SAGA TIMELINE)
+           ========================================================================== -->
+        <section id="experience" class="section-container">
+            <div class="section-header">
+                <div class="section-pre-title">
+                    <span>🛸</span> TRAINING CHRONOLOGY
+                </div>
+                <h2 class="section-title">THE GRAVITY CHAMBER JOURNEY</h2>
+                <p class="section-desc">Career arcs, power boosts, and battle scars earned defending production kingdoms.</p>
+            </div>
+
+            <div class="timeline-container">
+                <div class="timeline-beam"></div>
+
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item left">
+                    <div class="timeline-node"></div>
+                    <div class="timeline-card"
+                        data-scouter-name="Principal Saiyan Architect" data-scouter-power="9800" data-scouter-threat="ELITE">
+                        <div class="timeline-period">2023 — PRESENT</div>
+                        <h3 class="timeline-role">Principal Saiyan Architect</h3>
+                        <div class="timeline-company">Capsule Corporation Labs</div>
+                        <p class="timeline-desc">
+                            Spearheading distributed systems processing 50M+ requests daily. Spearheaded migration to edge micro-frontends, reducing global latencies by 64%.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="timeline-item right">
+                    <div class="timeline-node"></div>
+                    <div class="timeline-card"
+                        data-scouter-name="Senior Full-Stack Warrior" data-scouter-power="8900" data-scouter-threat="SENIOR">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <div class="timeline-period">2021 — 2023</div>
+                            <!-- DRAGON BALL #6 (6 STARS) -->
+                            <div class="dragon-ball-item" data-star="6" title="Collect the 6-Star Dragon Ball!"
+                                data-scouter-name="6-Star Dragon Ball" data-scouter-power="7777" data-scouter-threat="RELIC">
+                                <div class="db-stars-container">
+                                    <span class="db-star-icon">★</span>
+                                    <span class="db-star-icon">★</span>
+                                    <span class="db-star-icon">★</span>
+                                    <span class="db-star-icon">★</span>
+                                    <span class="db-star-icon">★</span>
+                                    <span class="db-star-icon">★</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="timeline-role">Senior Full-Stack Warrior</h3>
+                        <div class="timeline-company">Kami's Lookout Cloud Systems</div>
+                        <p class="timeline-desc">
+                            Engineered high-frequency WebSocket infrastructure and interactive dashboards. Mentored junior Saiyans through architectural code katas.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div class="timeline-item left">
+                    <div class="timeline-node"></div>
+                    <div class="timeline-card"
+                        data-scouter-name="Software Engineer Trainee" data-scouter-power="5200" data-scouter-threat="GROWING">
+                        <div class="timeline-period">2019 — 2021</div>
+                        <h3 class="timeline-role">Software Engineer</h3>
+                        <div class="timeline-company">Kame House Interactive</div>
+                        <p class="timeline-desc">
+                            Built robust React single-page applications and RESTful APIs. Mastered testing automation and responsive design conventions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+           SECTION 6: SPIRIT BOMB CONTACT CHAMBER
+           ========================================================================== -->
+        <section id="contact" class="section-container">
+            <div class="section-header">
+                <div class="section-pre-title">
+                    <span>🙌</span> GALAXY TRANSMISSION
+                </div>
+                <h2 class="section-title">LEND ME YOUR ENERGY</h2>
+                <p class="section-desc">Type your message to charge the Spirit Bomb. Fire when your thoughts are fully focused.</p>
+            </div>
+
+            <div class="contact-wrapper">
+                <!-- Interactive Spirit Bomb Visual -->
+                <div class="spirit-bomb-display">
+                    <div id="spirit-bomb-ki" class="spirit-bomb-orb"></div>
+                    <div class="spirit-charge-hud">
+                        SPIRIT BOMB CHARGE: <span id="spirit-charge-val" class="spirit-charge-val">0%</span>
+                    </div>
+                    <div style="margin-top: 0.75rem;">
+                        <!-- DRAGON BALL #7 (7 STARS - THE FINAL BALL!) -->
+                        <div class="dragon-ball-item" data-star="7" title="Collect the 7th Dragon Ball to complete the set!"
+                            data-scouter-name="7-Star Dragon Ball" data-scouter-power="8888" data-scouter-threat="FINAL RELIC">
+                            <div class="db-stars-container">
+                                <span class="db-star-icon">★</span>
+                                <span class="db-star-icon">★</span>
+                                <span class="db-star-icon">★</span>
+                                <span class="db-star-icon">★</span>
+                                <span class="db-star-icon">★</span>
+                                <span class="db-star-icon">★</span>
+                                <span class="db-star-icon">★</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <form id="dbz-contact-form">
+                    <div class="contact-form-grid">
+                        <div class="form-group">
+                            <label for="contact-name" class="form-label">Warrior Name</label>
+                            <input type="text" id="contact-name" class="form-input" placeholder="e.g. Vegeta, Lord of All" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email" class="form-label">Sub-Space Frequency (Email)</label>
+                            <input type="email" id="contact-email" class="form-input" placeholder="warrior@capsulecorp.com" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="contact-subject" class="form-label">Mission Briefing</label>
+                            <input type="text" id="contact-subject" class="form-input" placeholder="Contract / Job Offer / Collaboration" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="contact-message" class="form-label">Lend Your Energy (Message)</label>
+                            <textarea id="contact-message" class="form-textarea" placeholder="Describe your challenge, tech stack requirements, and timeline..." required></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="dbz-btn primary-btn" style="width:100%; font-size:1.15rem; padding:1.1rem;"
+                        data-scouter-name="Launch Kamehameha Transmission" data-scouter-power="10000" data-scouter-threat="SUPERNOVA">
+                        💥 FIRE KAMEHAMEHA TRANSMISSION!
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==========================================================================
+       DRAGON RADAR FLOATING HUD
+       ========================================================================== -->
+    <aside class="dragon-radar-hud" id="dragon-radar-widget" aria-label="Capsule Corp Dragon Radar">
+        <div class="radar-header">
+            <div class="radar-title">
+                <span>🟢</span> DRAGON RADAR v2.4
+            </div>
+            <div class="radar-count-display">
+                <span>FOUND:</span>
+                <span id="radar-count" class="radar-count-num">0/7</span>
+            </div>
+        </div>
+
+        <div class="radar-screen">
+            <div class="radar-grid"></div>
+            <div class="radar-sweep-line"></div>
+            <!-- 7 Blips mapped on radar -->
+            <div class="radar-blip" data-star="1" style="top: 25%; left: 30%;"></div>
+            <div class="radar-blip" data-star="2" style="top: 20%; left: 65%;"></div>
+            <div class="radar-blip" data-star="3" style="top: 55%; left: 20%;"></div>
+            <div class="radar-blip" data-star="4" style="top: 75%; left: 45%;"></div>
+            <div class="radar-blip" data-star="5" style="top: 40%; left: 78%;"></div>
+            <div class="radar-blip" data-star="6" style="top: 65%; left: 70%;"></div>
+            <div class="radar-blip" data-star="7" style="top: 50%; left: 50%;"></div>
+        </div>
+
+        <div class="radar-controls">
+            <div class="radar-btn-group">
+                <button id="radar-locate-btn" class="radar-btn" title="Scroll to closest undiscovered Dragon Ball">
+                    📍 LOCATE NEXT
+                </button>
+                <button id="radar-cheat-btn" class="radar-btn" title="Collect all 7 Dragon Balls instantly!">
+                    ✨ COLLECT ALL
+                </button>
+            </div>
+
+            <!-- Instant Summon Button (always ready or triggers modal) -->
+            <button id="summon-shenron-btn" class="summon-trigger-btn" title="Summon Shenron and make your wish!">
+                🐉 SUMMON SHENRON
+            </button>
+        </div>
+    </aside>
+
+    <!-- ==========================================================================
+       MODAL 1: SHENRON SUMMONING & WISH GRANTING
+       ========================================================================== -->
+    <div id="shenron-modal" class="dbz-modal hidden" role="dialog" aria-modal="true" aria-labelledby="shenron-heading">
+        <div class="modal-card">
+            <button class="modal-close-btn" id="close-shenron-btn" aria-label="Dismiss Shenron">✕</button>
+            <div class="shenron-modal-content">
+                <h2 id="shenron-heading" class="shenron-dragon-title">I AM THE ETERNAL DRAGON!</h2>
+                <p class="shenron-quote">
+                    "YOU WHO HAVE ASSEMBLED ALL SEVEN DRAGON BALLS...<br>
+                    SPEAK YOUR DESIRE, AND IT SHALL BE GRANTED!"
+                </p>
+
+                <div class="wish-options-grid" id="wish-buttons-container">
+                    <button class="wish-btn" data-wish="resume">
+                        <span class="wish-btn-icon">📜</span>
+                        <span class="wish-btn-title">WISH 1: SAIYAN RESUME</span>
+                        <span class="wish-btn-desc">Unlock and download full warrior credentials and enterprise metrics.</span>
+                    </button>
+
+                    <button class="wish-btn" data-wish="overdrive">
+                        <span class="wish-btn-icon">⚡</span>
+                        <span class="wish-btn-title">WISH 2: MAX OVERDRIVE</span>
+                        <span class="wish-btn-desc">Unleash infinite lightning ki aura particles across the entire portfolio!</span>
+                    </button>
+
+                    <button class="wish-btn" data-wish="contact">
+                        <span class="wish-btn-icon">💥</span>
+                        <span class="wish-btn-title">WISH 3: DIRECT KI LINE</span>
+                        <span class="wish-btn-desc">Open an emergency priority transmission channel directly to Alex.</span>
+                    </button>
+                </div>
+
+                <div id="wish-granted-message" class="hidden" style="margin-top:2rem;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       MODAL 2: PROJECT INSPECTION DETAILS
+       ========================================================================== -->
+    <div id="project-modal" class="dbz-modal hidden" role="dialog" aria-modal="true">
+        <div class="modal-card">
+            <button class="modal-close-btn" id="close-project-modal-btn" aria-label="Close Project Inspection">✕</button>
+            <div id="project-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       MODAL 3: TRANSMISSION RECEIVED CONFIRMATION
+       ========================================================================== -->
+    <div id="transmission-modal" class="dbz-modal hidden" role="dialog" aria-modal="true">
+        <div class="modal-card" style="max-width: 500px; text-align: center; padding: 2.5rem;">
+            <button class="modal-close-btn" id="close-transmission-btn" aria-label="Close Message">✕</button>
+            <div style="font-size: 3.5rem; margin-bottom: 1rem;">🚀</div>
+            <h2 style="font-family: var(--font-heading); color: var(--ki-primary); margin-bottom: 0.75rem;">
+                TRANSMISSION BROADCASTED!
+            </h2>
+            <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
+                Your signal has penetrated the upper stratosphere and arrived safely at Capsule Corp Headquarters. A reply will be transmitted via sub-space telemetry shortly!
+            </p>
+            <button class="dbz-btn primary-btn" onclick="document.getElementById('transmission-modal').classList.remove('active'); setTimeout(() => document.getElementById('transmission-modal').classList.add('hidden'), 300);">
+                ⚡ RETURN TO MISSION
+            </button>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       MODAL 4: SAIYAN RESUME SCROLL
+       ========================================================================== -->
+    <div id="resume-modal" class="dbz-modal hidden" role="dialog" aria-modal="true">
+        <div class="modal-card" style="max-width: 780px; padding: 2.5rem;">
+            <button class="modal-close-btn" onclick="this.closest('.dbz-modal').classList.remove('active'); setTimeout(() => this.closest('.dbz-modal').classList.add('hidden'), 300);">✕</button>
+            <div style="border-bottom: 2px solid var(--border-glow); padding-bottom: 1.5rem; margin-bottom: 1.5rem;">
+                <span class="modal-saga-tag">OFFICIAL CAPSULE CORP DOSSIER</span>
+                <h2 style="font-family: var(--font-heading); color: #fff; font-size: 2rem; margin: 0.25rem 0;" class="dynamic-user-name">ALEX CHEN</h2>
+                <div style="font-family: var(--font-hud); color: var(--ki-primary); font-size: 1.1rem; font-weight:700;">
+                    PRINCIPAL FULL-STACK SAIYAN ENGINEER &bull; POWER LEVEL 9,450
+                </div>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:1.25rem; color:var(--text-secondary); line-height: 1.7;">
+                <div>
+                    <h4 style="color:#fff; font-family:var(--font-heading); margin-bottom:0.4rem;">SUMMARY</h4>
+                    <p class="dynamic-user-bio">
+                        Full-Stack Engineer with 5+ years forging ultra-resilient distributed architectures, real-time reactive frontends, and mission-critical cloud pipelines. Passionate about sub-millisecond latencies, developer experience, and modern web aesthetics.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 style="color:#fff; font-family:var(--font-heading); margin-bottom:0.4rem;">CORE EXPERTISE</h4>
+                    <p>
+                        <strong style="color:var(--capsule-cyan);">Frontend:</strong> React, Next.js 15, TypeScript, WebGL, Canvas, Modern CSS.<br>
+                        <strong style="color:var(--capsule-cyan);">Backend:</strong> Node.js, Express, Go, Python, PostgreSQL, Redis, GraphQL.<br>
+                        <strong style="color:var(--capsule-cyan);">Infrastructure:</strong> Docker, Kubernetes, AWS, Cloudflare Workers, Terraform, CI/CD.
+                    </p>
+                </div>
+
+                <div style="display:flex; gap:1rem; margin-top:1rem;">
+                    <button class="dbz-btn primary-btn" onclick="window.print();">
+                        🖨️ PRINT / SAVE AS PDF
+                    </button>
+                    <a href="mailto:alex.saiyandev@capsulecorp.com" class="dbz-btn outline-btn">
+                        ✉️ CONTACT VIA EMAIL
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       SIDE DRAWER: SAIYAN IDENTITY LIVE CUSTOMIZER
+       ========================================================================== -->
+    <div id="customizer-drawer" class="customizer-drawer" role="dialog" aria-label="Identity Editor">
+        <div class="drawer-header">
+            <h3 class="drawer-title">SAIYAN IDENTITY</h3>
+            <button id="close-customizer-btn" class="modal-close-btn" style="position:static;">✕</button>
+        </div>
+
+        <form id="customizer-form" class="drawer-form">
+            <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.5;">
+                Personalize your portfolio details in real time. Changes are stored locally in your scouter memory!
+            </p>
+
+            <div class="form-group">
+                <label for="custom-name-input" class="form-label">Warrior Name</label>
+                <input type="text" id="custom-name-input" class="form-input" value="ALEX CHEN" placeholder="Your Name">
+            </div>
+
+            <div class="form-group">
+                <label for="custom-title-input" class="form-label">Combat Title</label>
+                <input type="text" id="custom-title-input" class="form-input" value="Full-Stack Saiyan Engineer" placeholder="Your Title">
+            </div>
+
+            <div class="form-group">
+                <label for="custom-bio-input" class="form-label">Warrior Bio / Manifesto</label>
+                <textarea id="custom-bio-input" class="form-textarea" style="min-height:90px;" placeholder="Your custom bio description...">Mastering the digital Hyperbolic Time Chamber to forge mission-critical architectures, ultra-fast interfaces, and bulletproof cloud infrastructures with power levels far surpassing mortal limits.</textarea>
+            </div>
+
+            <button type="submit" class="dbz-btn primary-btn" style="margin-top:0.5rem;">
+                ⚡ SAVE SAIYAN IDENTITY
+            </button>
+        </form>
+    </div>
+
+    <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+    <footer class="dbz-footer">
+        <div class="footer-container">
+            <div class="brand-capsule-logo" style="width:52px; height:52px;">
+                <img src="assets/images/dragonball.jpg" alt="Capsule Emblem">
+            </div>
+
+            <div class="footer-socials">
+                <a href="https://github.com" target="_blank" rel="noopener" class="social-link" title="GitHub Warrior Profile">GH</a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-link" title="LinkedIn Capsule Network">IN</a>
+                <a href="https://x.com" target="_blank" rel="noopener" class="social-link" title="X / Twitter Ki Updates">𝕏</a>
+                <a href="mailto:alex.saiyandev@capsulecorp.com" class="social-link" title="Direct Email Transmission">✉</a>
+            </div>
+
+            <div class="footer-seal">
+                CAPSULE CORPORATION &bull; EARTH DIVISION #7
+            </div>
+
+            <p class="footer-copy">
+                &copy; 2026 <span class="dynamic-user-name">ALEX CHEN</span> &bull; Dragon Ball Z Themed Developer Portfolio. Engineered with Saiyan Pride &amp; Pure Ki.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/audio.js"></script>
+    <script src="assets/js/particles.js"></script>
+    <script src="assets/js/scouter.js"></script>
+    <script src="assets/js/dragonballs.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
